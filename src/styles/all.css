@@ -1,0 +1,47 @@
+
+
+:root{
+    --color1: #FF8A00;
+    --color2: #ffffff;
+    --color3: #cccccc;
+    --color4: #000000; 
+    --color-border: #c3c3c3;
+    --white: #ffffff;
+    --black: #000000;
+    --gray: gray;
+    --black2: #33363F;
+    --white2: #F5F5F5;
+    --blue: #2266BB;
+    --blue-light: rgb(241, 166, 95);
+}
+
+
+
+body{
+    background-color: var(--white2);
+    font-family: "Inter";
+    font-size: 1em;
+}
+
+
+.body.modal-open{
+	overflow: hidden;
+}
+
+
+a{
+    color: var(--blue);
+}
+
+a:hover{
+    color: var(--blue-light)
+}
+
+@import "basicStyle.css";
+@import "layoutStyle.css";
+@import "utilStyle.css";
+
+
+#snap-midtrans{
+    width: 100vw !important;
+}

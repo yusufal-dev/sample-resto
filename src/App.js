@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import MenuPage from './pages/MenuPage';
+import CartPage from './pages/CartPage';
+import OrderPage from './pages/OrderPage';
+import PembayaranPage from './pages/PembayaranPage';
+import PaidOrder from './pages/PaidOrder';
+import ChoosingPage from './pages/ChoosingPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<MenuPage />} /> 
+        <Route path="/choosing" element={<ChoosingPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/order" element={<OrderPage />} />
+        <Route path="/payment" element={<PembayaranPage />} />
+        <Route path="/paid-order" element={<PaidOrder />} />
+      </Routes>
+    </Router>
   );
 }
 

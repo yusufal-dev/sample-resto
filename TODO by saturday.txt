@@ -1,0 +1,8 @@
+buat prosedur react dengan nomor order yang random
+
+
+1. klik menu -> generate random order id
+2. klik menu -> masukkan jumlah/total price
+3. klik checkout,  kirim ke database order_id, total price, payment_status, snap_token
+4. klik pay, lakukan proses pembayaran dengan midtrans/midtrans simulator
+5. tampilkan menu sukses
