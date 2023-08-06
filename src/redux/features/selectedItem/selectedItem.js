@@ -6,10 +6,10 @@ const initialState = {
     description: "",
     price: 0,
     discount: null,
-    image: {
-        src:"",
-        alt: ""
-    }
+    image: "",
+    item_opt_cat: [{
+        item_opts:[]
+    }]
 }
 
 export const selectedItemSlice = createSlice({
@@ -21,15 +21,22 @@ export const selectedItemSlice = createSlice({
             state.key = action.payload.key;
             state.name = action.payload.name;
             state.description = action.payload.description;
-            state.price = action.payload.price;
+            state.price = action.payload.item_prices ? parseFloat(action.payload.item_prices.amount) : 0;
             state.discount = action.payload.discount;
             state.image = action.payload.image;
+            state.item_opt_cat = action.payload.item_opt_cat
         },
+        setSelectedItemAddPrice: (state, action)=>{
+            state.price = parseFloat(state.price) + parseFloat(action.payload)
+        },
+        setSelectedItemSubPrice: (state, action)=>{
+            state.price = parseFloat(state.price) - parseFloat(action.payload)
+        }
 
     }
 })
 
 
-export const {reset, setSelectedItem } = selectedItemSlice.actions
+export const {reset, setSelectedItem ,setSelectedItemAddPrice,setSelectedItemSubPrice} = selectedItemSlice.actions
 
 export default selectedItemSlice.reducer 

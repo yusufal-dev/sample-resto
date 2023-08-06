@@ -10,8 +10,12 @@ import MenuList from '../components/Menu/MenuList';
 import MenuItem from '../components/Menu/MenuItem';
 
 import { Link } from 'react-router-dom';
+import useInitialLoad from '../hooks/useInitialLoad';
+
 
 function App() {
+
+  useInitialLoad();
 
   return (
     <div className="App">

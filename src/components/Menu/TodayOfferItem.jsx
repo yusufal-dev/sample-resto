@@ -1,6 +1,7 @@
 import '../../styles/basicStyle.css';
 import AyamBakarKomplit from '../../static/menu-images/ayam-bakar-komplit.jpg';
 import PriceIcon from '../../static/icons/LablePrice.png';
+import NoImage from '../../static/no_product_image.jpg';
 import { rupiah } from '../../Helpers';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,18 +21,21 @@ export default function TodayOfferItem({item}){
 	}
 
 
-    var originalPrice = rupiah(parseInt(item.price + item.discount));
+    const price = item.item_prices ? item.item_prices.amount : 0;
+    const image = item.image ? process.env.REACT_APP_BE_URL + item.image : NoImage;
+
     return(
 
         <div className='card-b-shadow'>
 			{/* <Link to={'/choosing'} className='pointer no-text-decoration text-black2'> */}
 				<div className="flex-container pointer" onClick={onClickSelectItem}> 
-					<img src={item.image.src} className="thumbnail" />
+					<img src={image} className="thumbnail" />
 					<div className="description-box text-small2">
 						<p className='mt-0 mb-0 text-big2'>{item.name}</p>
 						<p className='text-gray'><small>{item.description}</small></p>
+						<p ><b>{rupiah(price)}</b> </p>
 						
-						<p ><b>{rupiah(item.price)}</b> 
+						{/* <p ><b>{rupiah(item.price)}</b> 
 						{
 							item.discount && item.discount > 0 ? 
 							<>
@@ -41,7 +45,7 @@ export default function TodayOfferItem({item}){
 							:
 							<></>
 						}
-						</p>
+						</p> */}
 							
 
 					</div>

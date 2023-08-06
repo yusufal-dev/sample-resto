@@ -8,6 +8,8 @@ import PaidOrder from './pages/PaidOrder';
 import ChoosingPage from './pages/ChoosingPage';
 
 function App() {
+
+  
   return (
     <Router>
       <Routes>

@@ -27,6 +27,9 @@ export default function ChoosingPage(){
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
+    const itemOptCat = gSelectedItem.item_opt_cat;
+    console.log("selectedItem")
+    console.log(gSelectedItem)
     const [totalPrice, setTotalPrice] = useState()
     const [totalItem, setTotalItem] = useState(1)
 
@@ -52,52 +55,52 @@ export default function ChoosingPage(){
     }
 
 
-    const topping = [
-        {
-            key: 1,
-            title: "Coffee Size",
-            type: "radio",
-            sub: [
-                {
-                    key: 1,
-                    name: "Small",
-                    price: 0
-                },
-                {
-                    key:2,
-                    name: "Medium",
-                    price: 5000
-                },
-                {
-                    key:3,
-                    name: "Large",
-                    price: 10000
-                }
-            ]
-        },
-        {
-            key:2,
-            title:"Milk",
-            type:"checklist",
-            sub: [
-                {
-                    key:1,
-                    name: "Non-fat Milk",
-                    price: 0
-                },
-                {
-                    key:2,
-                    name: "Soy Milk",
-                    price: 5000
-                },
-                {
-                    key:3,
-                    name: "Oat Milk",
-                    price: 10000
-                }
-            ]
-        }
-    ];
+    // const topping = [
+    //     {
+    //         key: 1,
+    //         title: "Coffee Size",
+    //         type: "radio",
+    //         sub: [
+    //             {
+    //                 key: 1,
+    //                 name: "Small",
+    //                 price: 0
+    //             },
+    //             {
+    //                 key:2,
+    //                 name: "Medium",
+    //                 price: 5000
+    //             },
+    //             {
+    //                 key:3,
+    //                 name: "Large",
+    //                 price: 10000
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         key:2,
+    //         title:"Milk",
+    //         type:"checklist",
+    //         sub: [
+    //             {
+    //                 key:1,
+    //                 name: "Non-fat Milk",
+    //                 price: 0
+    //             },
+    //             {
+    //                 key:2,
+    //                 name: "Soy Milk",
+    //                 price: 5000
+    //             },
+    //             {
+    //                 key:3,
+    //                 name: "Oat Milk",
+    //                 price: 10000
+    //             }
+    //         ]
+    //     }
+    // ];
 
 
     return(
@@ -107,7 +110,7 @@ export default function ChoosingPage(){
 
             <div>
            
-            {
+            {/* {
                 topping.map(item => {
                     return(
                         <>
@@ -125,14 +128,32 @@ export default function ChoosingPage(){
                         </>
                     )
                 })
+            } */}
+
+            {
+               itemOptCat.map(item => 
+
+
+                    <div className='mt-1'>
+                        {
+                            item.item_opts.length > 0 ?
+                            <MultipleChoosing title={item.description} dataItem={item.item_opts} radioName={item.opt_cat_id} />
+                            :
+                            <div></div>
+                        }
+                        
+                    </div>
+                )
             }
+           
+
 
             <div className='mt-1'>
                 {/* <Notes /> */}
             </div>
 
             </div>
-            <div className='space-20' />
+            <div className='space-20 mt-2' />
 
             <div className="container-float bg-white card-t-shadow btm-0 pb-1 pt-1  vw-100">
                 

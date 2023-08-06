@@ -1,17 +1,20 @@
 import '../../styles/all.css';
 import PriceIcon from '../../static/icons/Lable.png'
 import CloseIcon from '../../static/icons/close_button.png'
-
+import NoImage from '../../static/no_product_image.jpg';
 import { rupiah } from "../../Helpers";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { reset } from '../../redux/features/selectedItem/selectedItem';
 
-export function Header({title, imgHeader, description, price, discount}){
+export function Header(){
 
     const gSelectedItem = useSelector((state) => state.selectedItem)
+    const image = gSelectedItem.image ? process.env.REACT_APP_BE_URL + gSelectedItem.image : NoImage;
+    const price = gSelectedItem.item_prices ? gSelectedItem.item_prices.amount : 0;
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
 
     function onClickClose(){
         dispatch(reset());
@@ -26,7 +29,7 @@ export function Header({title, imgHeader, description, price, discount}){
                     <img src={CloseIcon} />
                 </div>
 
-            <img src={gSelectedItem.image.src} className='w-100' />
+            <img src={image} className='w-100' />
             <div className='card-body  pl-3 pr-3 pt-2  text-black2'>
                 <div className="container-between">
                     <div>

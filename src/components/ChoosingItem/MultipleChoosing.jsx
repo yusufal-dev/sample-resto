@@ -1,8 +1,21 @@
 import '../../styles/all.css';
 import { rupiah } from '../../Helpers';
+import { useDispatch } from 'react-redux';
+import { setSelectedItemAddPrice, setSelectedItemSubPrice } from '../../redux/features/selectedItem/selectedItem';
 
 export function MultipleChoosing({title, dataItem, radioName}){
+    const dispatch = useDispatch();
 
+    function funcAddPrice(item, event){
+        console.log(event.target.checked)
+        const isChecked = event.target.checked;
+        if(isChecked){
+            dispatch(setSelectedItemAddPrice(item.add_price))
+        }else{
+            dispatch(setSelectedItemSubPrice(item.add_price))
+        }
+        
+    }
 
     return(
         <div className='card w-100 bg-white pt-1 pb-0 '>
@@ -19,15 +32,15 @@ export function MultipleChoosing({title, dataItem, radioName}){
             {
                 dataItem.map((item) => {
                     return(
-                        <div className="container-between border-btm pt-2 pb-2 text-gray text-small2 ">
-                            <div className='w-40'>
-                                <input  type="checkbox" id={item.key} name={radioName} />
+                        <div className="container-between border-btm pt-2 pb-2 text-gray text-small2 " >
+                            <div className='w-40 pl-4'>
+                                <input  type="checkbox" id={item.opt_id} name={radioName} onClick={e => funcAddPrice(item,e)}/>
                                 <label className='pl-2'>
-                                    {item.name}
+                                    {item.description}
                                 </label>
                             </div>
                             <div>
-                                {rupiah(item.price)}
+                                {rupiah(item.add_price)}
                            </div>
                             
                             
