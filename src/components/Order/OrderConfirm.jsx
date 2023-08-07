@@ -1,50 +1,76 @@
 
 import PopUp from "../../baseComponents/PopUp";
 import OrderConfirmButton from "../../baseComponents/OrderConfirmButton";
-import orderPlaced from'../../static/orderPlaced.png';
-import okConfirm from'../../static/okConfirm.png';
 
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { Yard } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetCart } from "../../redux/features/cart/cartSlice";
+import axios from "axios";
 
-export function OrderConfirm({onClickModal, confirmUrl}){
+export function OrderConfirm({
+    confirmUrl, status, modalTitle, modalDescription, modalButtonCancel, modalButtonConfirm, modalImage,
+    onClickModal, onClickButtonConfirm, changeMessage
+    }){
+    
+    const gCart = useSelector((state)=>state.cart)
+    const restaurantInfo = useSelector((state) => state.restaurantInfo)
+    const orderNumber = restaurantInfo.order.order_id
+    const totalCart = gCart.items.reduce((prev, {total}) => {
+		return prev + total
+	}, 0)
 
+	const totalPrice = gCart.items.reduce((prev, {total_price}) => {
+		return prev + total_price
+	}, 0)
     const dispatch = useDispatch();
 
-    const defTitle="Confirm your order?";
-    const defDesc="Please ensure your order is accurate before we start processing it at the outlet. Thanks!"
-    const defConfirm = "Yes, Confirm"
-    const defCancel = "Check Again"
+    const title = modalTitle ? modalTitle : "Please Confirm";
+    const description= modalDescription ? modalDescription : "Please confirm before we continue to  process it. Thanks!"
+    const button1 = modalButtonConfirm ? modalButtonConfirm : "Yes"
+    const button2 = modalButtonCancel ? modalButtonCancel : null
 
-    const [imgButton, setImgButton] = useState(orderPlaced)
-    const [title, setTitle] = useState(defTitle)
-    const [description, setDescription] = useState(defDesc)
-    const [button1, setButton1] = useState(defConfirm);
-    const [button2, setButton2] = useState(defCancel)
+    const [loading, setLoading] = useState(false)
+    const loadingTitle = "Sending your order"
+    const loadingDescription = "Please wait a moment. We are confirming your order."
 
-    function onClickConfirm({onClickAction}){
+    function onClickConfirm(){
+        //CHECK ORDER IN THE BACK END
+        console.log("CART BEFORE SENDING TO BE")
+        console.log(gCart)
+        sendOrderToRestaurant()
         dispatch(resetCart())
-        setButton1("OK")
-        setButton2(null)
-        setImgButton(okConfirm)
-        
+        onClickButtonConfirm()
+        changeMessage("Success!", "Thank you for ordering!")
     }
 
     function onClickCancel(){
         onClickModal(false)
     }
 
+    function sendOrderToRestaurant(){
+        axios.post(process.env.REACT_APP_API_URL + "/orders/post-order", {
+            order_number : orderNumber,
+            total_item: totalCart,
+            total_price: totalPrice,
+            order_items : gCart.items
+        })
+        .then((response)=>{
+            console.log(response.data)
+        })
+    }
+
+
     return(
         <>
-        
             <PopUp 
                 component={
                     <OrderConfirmButton 
-                        imgButton={imgButton}
-                        title={title}
-                        description={description}
+                        imgButton={modalImage}
+                        loading={loading}
+                        title={loading ? loadingTitle : title}
+                        description={loading ? loadingDescription :  description}
                         button1={button1}
                         button2={button2}
                         onClickButton1={onClickConfirm}

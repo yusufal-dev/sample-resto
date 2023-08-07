@@ -3,16 +3,21 @@ import { rupiah } from '../../Helpers';
 import { useDispatch } from 'react-redux';
 import { setSelectedItemAddPrice, setSelectedItemSubPrice } from '../../redux/features/selectedItem/selectedItem';
 
-export function MultipleChoosing({title, dataItem, radioName}){
+export function MultipleChoosing({
+    title, dataItem, radioName,
+    addSelectedItem, subSelectedItem
+    }){
     const dispatch = useDispatch();
 
-    function funcAddPrice(item, event){
+    function functAddOpt(item, event){
         console.log(event.target.checked)
         const isChecked = event.target.checked;
         if(isChecked){
             dispatch(setSelectedItemAddPrice(item.add_price))
+            addSelectedItem(item)
         }else{
             dispatch(setSelectedItemSubPrice(item.add_price))
+            subSelectedItem(item)
         }
         
     }
@@ -32,9 +37,9 @@ export function MultipleChoosing({title, dataItem, radioName}){
             {
                 dataItem.map((item) => {
                     return(
-                        <div className="container-between border-btm pt-2 pb-2 text-gray text-small2 " >
+                        <div key={item.opt_id} className="container-between border-btm pt-2 pb-2 text-gray text-small2 " >
                             <div className='w-40 pl-4'>
-                                <input  type="checkbox" id={item.opt_id} name={radioName} onClick={e => funcAddPrice(item,e)}/>
+                                <input  type="checkbox" id={item.opt_id} name={radioName} onClick={e => functAddOpt(item,e)}/>
                                 <label className='pl-2'>
                                     {item.description}
                                 </label>

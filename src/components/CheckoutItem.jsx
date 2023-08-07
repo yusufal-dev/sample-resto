@@ -15,19 +15,19 @@ export default function CheckoutItem({targetLink}){
 	const gCart = useSelector((state) => state.cart)
 	// let totalCart = 0;
 
-	// if(gCart.item.length > 0){
-	// 	totalCart = gCart.item.reduce((prev, curr) => {
+	// if(gCart.items.length > 0){
+	// 	totalCart = gCart.items.reduce((prev, curr) => {
 	// 		return prev + curr.total
 	// 	})
 	// }
 
 
-	const totalCart = gCart.item.reduce((prev, {total}) => {
+	const totalCart = gCart.items.reduce((prev, {total}) => {
 		return prev + total
 	}, 0)
 
-	const totalPrice = gCart.item.reduce((prev, {totalPrice}) => {
-		return prev + totalPrice
+	const totalPrice = gCart.items.reduce((prev, {total_price}) => {
+		return prev + total_price
 	}, 0)
 	
 
@@ -36,21 +36,26 @@ export default function CheckoutItem({targetLink}){
 	
 		<div >
 			<Link to={targetLink} className="no-text-decoration" >
-				<div className=" button-confirm ">
-					<div className="basket-div">
+				
+				<div className=" button-confirm container-flex">
+					
+					<div className="basket-div  justify-middle">
 						<div className='flex-container'>
 							<img className="icon-pembayaran" src={BasketIcon} />
 							<div className='text-black2 '>{totalCart}</div>
 						</div>
 						
 					</div>
-					<div className="total-pembayaran-div">
-						<p>Total</p>
-						<b>{rupiah(totalPrice)}</b>
+					<div className='total-pembayaran-div w-100 px-2 container-between justify-middle'>
+						<div className="">
+							<p>Total<br/><b>{rupiah(totalPrice)}</b></p>
+							
+						</div>
+						<div className="checkout-div">
+							<b>CHECKOUT({totalCart})</b>
+						</div>
 					</div>
-					<div className="checkout-div">
-						<b>CHECKOUT</b>
-					</div>
+					
 				
 				</div>
 			</Link>

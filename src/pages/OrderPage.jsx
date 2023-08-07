@@ -14,12 +14,38 @@ import TableNumber from '../components/TableNumber';
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { rupiah } from '../Helpers';
+import PageBottom from '../components/PageBottom/PageBottom';
 
 
 export default function OrderPage(){
 
+	const restaurantInfo = useSelector((state) => state.restaurantInfo)
+	const order_number = restaurantInfo.order.order_id;
+	const tableNum = restaurantInfo.order.table_num
+	const [orderList, setOrderList] = useState();
+	const [orderTotalPrice, setOrderTotalPrice] = useState(0);
+	console.log(orderList)
 
-	const gCart = useSelector((state) => state.cart)
+	function get_order_list(){
+		axios.get(process.env.REACT_APP_API_URL + "/order-list", {
+            params: {
+                order_number: order_number
+            }
+        }).then((response) =>{
+                console.log(response.data)
+				setOrderList(response.data.order_sequences)
+				setOrderTotalPrice(response.data.order_total_price)
+				
+                
+            })
+	}
+
+	useEffect(()=>{
+		get_order_list()
+	}, [])
 
 	const orderData = [
 		{
@@ -60,13 +86,28 @@ export default function OrderPage(){
 	return(
 		<>
 		
-			<PageHeader title="Order" backTo="/cart" />
+			<PageHeader title="Order" backTo="/menu" />
 			
 			<div className="container">
 			
-				<TableNumber number="B1" orderNumber={"XXX132478945XXX"}/>
+				<TableNumber number={tableNum} orderNumber={order_number}/>
 
-				<div className=" mb-3 mt-3">
+
+				{
+					orderList?.map((item,index) => 
+						<>
+							<div className=" mb-3 mt-3">
+								<div className="flex-left">
+									<b>Order {index+1}</b>
+								</div>
+							</div>
+							
+							<OrderList item={item.order_items} />
+						</>
+						)
+				}
+
+				{/* <div className=" mb-3 mt-3">
 					<div className="flex-left">
 						<b>Order 1</b>
 					</div>
@@ -81,7 +122,7 @@ export default function OrderPage(){
 				</div>
 				
 				<OrderList item={orderData} />
-				
+				 */}
 				<div className="space-20" />
 				<div className="space-20" />
 				<div className="space-5" />
@@ -89,52 +130,26 @@ export default function OrderPage(){
 				
 				
 			</div>
-			
-			<div className="container-float card-t-shadow btm-0 box-top-radius w-100 bg-white">
 
-					<div className="container mt-2 mb-2">
-						<small>Total payment</small>
-						<div className="container-between mb-10">
-							<div className="flex-left  w-40">
-								<p><b>Rp205.618 </b></p>
-							</div>
-							<div  className="flex-right w-50">
-								<Link to="/payment">
-									<ButtonPay title="Pay" />
-								</Link>
-							</div>
+			<PageBottom 
+				extraClass={" card-t-shadow box-top-radius "}
+				 extraComponent={
+					<>
+					<small>Total payment</small>
+					<div className="container-between mb-10">
+						<div className="flex-left  w-40">
+							<p><b>{rupiah(orderTotalPrice)} </b></p>
 						</div>
-						
+						<div  className="flex-right w-50">
+							<Link to="/payment">
+								<ButtonPay title="Pay" />
+							</Link>
+						</div>
 					</div>
+					</>
+				 }
+				/>
 
-					
-					<div className="card-t-shadow w-100">
-						<div className="container mt-1">
-							<div className="container-between ">
-								<div className="flex-left  w-40 text-center">
-									<Link to="/menu">
-										<img src={Book} />
-										
-									</Link>
-									<div>Menu</div>
-								</div>
-								<div  className="flex-right w-50 text-center ">
-									<Link to="/cart">
-										<img src={Paper} />
-										
-									</Link>
-									<div className="text-primary">Order List</div>
-								</div>
-							</div>
-						</div>
-						
-						
-					</div>
-					
-					
-				
-				</div>
-			
 		
 		</>
 	

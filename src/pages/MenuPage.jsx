@@ -20,6 +20,7 @@ import { PageHeader1 as PageHeader } from '../components/PageHeader/PageHeader1'
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useWhenReload from '../hooks/useWhenReload';
+import PageBottom from '../components/PageBottom/PageBottom';
 
 function MenuPage() {
 
@@ -88,36 +89,12 @@ function MenuPage() {
 			
 			
 		</div>
-		<div className="container-float btm-0 vw-100">
 
-				<div className='container overflow-none'>
-					<CheckoutItem  targetLink={'/cart'} />	
-				</div>
-			
-			<div className=" bg-white w-100  card-t-shadow  ">
-				
-				<div >
-					<div className="container-between pt-1 pb-1 ">
-						<div className="flex-left  w-50 text-center">
-							<Link to="/menu">
-								<img src={Book} />
-								
-							</Link>
-							<div  className="text-small1 ">Menu</div>
-						</div>
-						<div  className="flex-right w-50 text-center ">
-							<Link to="/cart">
-								<img src={Paper} />
-								
-							</Link>
-							<div className="text-small1 text-primary">Order List</div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-				
-		</div>
+		<PageBottom
+			extraComponent={<CheckoutItem  targetLink={'/cart'} />	}
+		/>
+
+		
     </>
   );
 }

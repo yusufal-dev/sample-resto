@@ -63,6 +63,10 @@
 	position: absolute;
 }
 
+.container-flex{
+	display: flex !important;
+}
+
 .container-between{
 	display: flex !important;
 	justify-content: space-between;
@@ -71,6 +75,10 @@
 
 .justify-bottom{
 	vertical-align: bottom !important;
+}
+
+.justify-middle{
+	align-items: center !important;
 }
 
 .bg-white{
@@ -123,6 +131,8 @@
 .btn-disabled{
 	opacity: 0.5 !important;
 	background-color: #CCCCCC !important;
+	border-color: #CCCCCC !important;
+	color: var(--gray) !important;
 }
 
 .btn-disabled > .icon-div{

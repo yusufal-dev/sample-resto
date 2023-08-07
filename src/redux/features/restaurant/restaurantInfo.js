@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     order:{
-        orderNumber: "",
+        order_id: "",
         table_num:"",
         is_paid:0,
         subtotal:"",
@@ -32,7 +32,7 @@ export const restaurantInfoSlice = createSlice({
     initialState,
     reducers: {
         setOrderNumber:(state, action)=>{
-            state.order.orderNumber = action.payload
+            state.order.order_id = action.payload
         },
         setUserOrder:(state, action)=>{
             state.order = action.payload

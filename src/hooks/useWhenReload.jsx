@@ -6,7 +6,7 @@ import {useSelector } from 'react-redux';
 function useWhenReload(){
 
     const restaurantInfo = useSelector((state)=>state.restaurantInfo)
-	const orderNumber  =  restaurantInfo.order.orderNumber;
+	const orderNumber  =  restaurantInfo.order.order_id;
 	const navigate = useNavigate();
 
 

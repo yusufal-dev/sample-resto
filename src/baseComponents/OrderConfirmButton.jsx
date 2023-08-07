@@ -2,7 +2,7 @@ import ButtonConfirm from "./ButtonConfirm";
 import ButtonCancel from "./ButtonCancel";
 import { Link } from "react-router-dom";
 
-export default function OrderConfirmButton({imgButton, title, description, button1, button2, onClickButton1, onClickButton2, onClickButtonOk, confirmUrl}){
+export default function OrderConfirmButton({imgButton, loading, title, description, button1, button2, onClickButton1, onClickButton2, onClickButtonOk, confirmUrl}){
 
 
     
@@ -11,7 +11,13 @@ export default function OrderConfirmButton({imgButton, title, description, butto
 
         <div className='fixed-b box-top-radius  w-100 bg-white text-center text-small2'>
             <div className="container mt-3">
-                <img src={imgButton} className=" w-40" />
+                {
+                    loading ?
+                    "Loading..."
+                    :
+                    <img src={imgButton} className=" w-40" />
+                }
+                
                 <div>
                     <h4>{title}</h4>
                     <p>{description}</p>
@@ -24,10 +30,10 @@ export default function OrderConfirmButton({imgButton, title, description, butto
                     button2 ? 
                     <>
                         <div className="container w-50">
-                            <ButtonCancel title={button2} onClick={onClickButton2} />
+                            <ButtonCancel title={button2} onClick={onClickButton2} disabled={loading ? true : false} />
                         </div>  
                         <div className="container w-50">
-                            <ButtonConfirm title={button1} onClick={onClickButton1}  />
+                            <ButtonConfirm title={button1} onClick={onClickButton1}  disabled={loading ? true : false}  />
                         </div>
                     </>
                     : 

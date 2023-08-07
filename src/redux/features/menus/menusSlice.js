@@ -5,12 +5,7 @@ const initialState = {
         categ_id: "",
         name:"",
         description: "",
-        items:[{
-            item_prices:[],
-            item_opt_cat: [{
-                item_opts:[]
-            }]
-        }]
+        items:[]
     },
     menuTodayOffer:{
         categ_id: "",

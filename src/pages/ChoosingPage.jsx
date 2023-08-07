@@ -10,7 +10,7 @@ import CloseIcon from '../static/icons/close_button.png'
 //buat mapping card untuk radio & checklist
 //tambah komponen button di paling bawah
 
-import { Header , SingleChoosing, MultipleChoosing} from "../components/ChoosingItem";
+import { Header , SingleChoosing, MultipleChoosing, Notes} from "../components/ChoosingItem";
 import { useState } from 'react';
 import { rupiah } from '../Helpers';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,8 +30,9 @@ export default function ChoosingPage(){
     const itemOptCat = gSelectedItem.item_opt_cat;
     console.log("selectedItem")
     console.log(gSelectedItem)
-    const [totalPrice, setTotalPrice] = useState()
     const [totalItem, setTotalItem] = useState(1)
+    const [selectedOpt, setSelectedOpt] = useState([])
+
 
     function onClickAddCounter(e){
         setTotalItem(totalItem+1)
@@ -41,14 +42,33 @@ export default function ChoosingPage(){
         totalItem > 0 ? setTotalItem(totalItem-1) : setTotalItem(0)
     }
 
+    function addSelectedOpt(opt){
+        setSelectedOpt([
+            ...selectedOpt,
+            opt
+        ])
+    }
+
+    function subSelectedOpt(opt){
+        setSelectedOpt(
+            selectedOpt.filter(x => x.opt_id != opt.opt_id)
+        )
+    }
+
+
+
     function onClickAddCart(){
         const item = {
             total: totalItem,
+            item_id: gSelectedItem.item_id,
             name: gSelectedItem.name,
             description: gSelectedItem.description,
-            notes: "porsi banyak",
-            originalPrice: gSelectedItem.price,
-            totalPrice: gSelectedItem.price * totalItem
+            notes: gSelectedItem.note,
+            original_price: gSelectedItem.price,
+            discount: gSelectedItem.discount,
+            total_price: (gSelectedItem.price + gSelectedItem.total_add) * totalItem,
+            item_opts: selectedOpt,
+            total_add: gSelectedItem.total_add
         }
         dispatch(addItem(item))
         navigate('/menu')
@@ -122,7 +142,7 @@ export default function ChoosingPage(){
                                     
                                 :
                                 <div className='mt-1'>
-                                    <MultipleChoosing title={item.title} dataItem={item.sub} radioName={"radio"+item.key} />
+                                    <MultipleChoosing key={item.key} title={item.title} dataItem={item.sub} radioName={"radio"+item.key} />
                                 </div>
                             }
                         </>
@@ -131,15 +151,27 @@ export default function ChoosingPage(){
             } */}
 
             {
-               itemOptCat.map(item => 
+               itemOptCat?.map(item => 
 
 
-                    <div className='mt-1'>
+                    <div key={item.opt_cat_id} className='mt-1'>
                         {
                             item.item_opts.length > 0 ?
-                            <MultipleChoosing title={item.description} dataItem={item.item_opts} radioName={item.opt_cat_id} />
+                            <div >
+                                
+                                <MultipleChoosing 
+                                    
+                                    title={item.description} 
+                                    dataItem={item.item_opts} 
+                                    radioName={item.opt_cat_id} 
+                                    addSelectedItem={addSelectedOpt}
+                                    subSelectedItem={subSelectedOpt}
+                                    />
+                               
+                            </div>
+                            
                             :
-                            <div></div>
+                            <div key={item.opt_cat_id}></div>
                         }
                         
                     </div>
@@ -147,10 +179,10 @@ export default function ChoosingPage(){
             }
            
 
-
-            <div className='mt-1'>
-                {/* <Notes /> */}
+           <div className='mt-1'>
+                <Notes itemNote={gSelectedItem.note}/>
             </div>
+            
 
             </div>
             <div className='space-20 mt-2' />
@@ -171,7 +203,7 @@ export default function ChoosingPage(){
                         </div>
                     </div>
 
-                    <ButtonConfirm  title={"Add Order - " + rupiah(gSelectedItem.price * totalItem)} onClick={onClickAddCart}  />
+                    <ButtonConfirm  title={"Add Order - " + rupiah((gSelectedItem.price + gSelectedItem.total_add) * totalItem)} onClick={onClickAddCart}  />
                 </div>
             </div>
             

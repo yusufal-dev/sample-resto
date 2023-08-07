@@ -7,11 +7,11 @@ export default function OrderSummary({item}){
 
 	const gCart = useSelector((state) => state.cart)
 
-	const subTotal = gCart.item.reduce((prev, {totalPrice}) => {
-		return prev + totalPrice
+	const subTotal = gCart.items.reduce((prev, {total_price}) => {
+		return prev + total_price
 	}, 0)
 
-	const otherFees = parseInt(subTotal * 11 /100) ; 
+	const otherFees = 0 ; 
 	const totalPrice = subTotal + otherFees;
 	
 	return(

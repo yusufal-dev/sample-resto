@@ -79,7 +79,7 @@ export default function ForYou({menuData}){
         <div className="for-you-container">
             
             {
-                menuData.map(item =>  <ForYouItem key={item.name}  item={item} />)
+                menuData.map(item =>  <ForYouItem key={item.item_id}  item={item} />)
                 
             }
 			

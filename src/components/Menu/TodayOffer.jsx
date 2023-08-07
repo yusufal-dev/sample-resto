@@ -81,7 +81,7 @@ export default function TodayOffer({menuData}){
         <div className="today-offer-container">
             
             {
-                menuData.map(item =>  <TodayOfferItem key={item.name}  item={item} />)
+                menuData.map(item =>  <TodayOfferItem key={item.item_id}  item={item} />)
                 
             }
 			
