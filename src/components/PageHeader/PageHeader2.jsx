@@ -5,10 +5,14 @@ import '../../styles/utilStyle.css';
 import ArrowLeft from '../../static/icons/Arrow_alt_left_alt.png';
 import Refresher from '../../static/icons/Refresh.png';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
-export  function PageHeader2({title, backTo}){
+export  function PageHeader2({title, backTo, onReload}){
+	
+	function refreshContent(){
+		onReload()
+	}
 	
 	return(
 		<div className="card-b-shadow">
@@ -25,7 +29,9 @@ export  function PageHeader2({title, backTo}){
 						<h3 className='mt-1 mb-1'>{title}</h3>
 					</div>
 					<div  className='w-10 text-center'>
-						<img src={Refresher}  className='mt-1 mb-1' />
+						
+							<img src={Refresher}  className='mt-1 mb-1' onClick={refreshContent} />
+						
 					</div>
 			
 			</div>

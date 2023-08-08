@@ -16,6 +16,7 @@ function useInitialLoad(){
     const [queryParams] = useSearchParams();
     const order_number = queryParams.get("order")
     localStorage.setItem('qresto-orderNumber', order_number)
+    const rootStyle = document.querySelector(':root')
     
 
     function getOrder(){
@@ -30,6 +31,9 @@ function useInitialLoad(){
                 dispatch(setTheme(response.data.theme))
                 dispatch(setMenuForYou(response.data.menu_for_you))
                 dispatch(setMenuTodayOffer(response.data.menu_today_offer))
+
+                rootStyle.style.setProperty('--color1',response.data.theme.color1 )
+                rootStyle.style.setProperty('--color2',response.data.theme.color2 )
                
             })
     }

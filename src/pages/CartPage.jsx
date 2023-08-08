@@ -47,7 +47,7 @@ export default function CartPage(){
 	
 	return(
 		< >
-			<PageHeader title="Order" backTo="/menu" />
+			<PageHeader title="Order" backTo="/menu" reload="/cart" />
 			<div className="container">
 				<TableNumber number={tableNum} orderNumber={orderNumber}/>
 				<div className="container-between mb-3">

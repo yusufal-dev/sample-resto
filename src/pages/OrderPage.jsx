@@ -25,9 +25,14 @@ export default function OrderPage(){
 	const restaurantInfo = useSelector((state) => state.restaurantInfo)
 	const order_number = restaurantInfo.order.order_id;
 	const tableNum = restaurantInfo.order.table_num
+	const [reload, setReload] = useState(0)
 	const [orderList, setOrderList] = useState();
 	const [orderTotalPrice, setOrderTotalPrice] = useState(0);
 	console.log(orderList)
+
+	function onReload(){
+		setReload(reload + 1)
+	}
 
 	function get_order_list(){
 		axios.get(process.env.REACT_APP_API_URL + "/order-list", {
@@ -45,54 +50,17 @@ export default function OrderPage(){
 
 	useEffect(()=>{
 		get_order_list()
-	}, [])
-
-	const orderData = [
-		{
-			name: "Ayam Bakar Komplit",
-			description: "ayam bakar + nasi + sambal + lalapan + tempe + es teh manis",
-			note: "pedes sedang",
-			totalPrice: 28990,
-			total: 2
-			
-		},
-		{
-			name: "Ayam Bakar Komplit",
-			description: "ayam bakar + nasi + sambal + lalapan + tempe + es teh manis",
-			note: "pedes extra",
-			totalPrice: 28990,
-			total: 1
-			
-		},
-		{
-			name: "Paket Ayam Penyet Komplit",
-			description: "ayam penyet + nasi + sambal + lalapan + tempe + es teh manis",
-			note: "pedes banget",
-			totalPrice: 28990,
-			total: 3
-			
-		},
-		{
-			name: "Paket Ayam Penyet Komplit",
-			description: "ayam penyet + nasi + sambal + lalapan + tempe + es teh manis",
-			note: "tidak pedas",
-			totalPrice: 28990,
-			total: 1
-			
+		return function cleanup(){
+			setOrderList(null)
 		}
-			
-		];
+	}, [reload])
+
 	
 	return(
 		<>
-		
-			<PageHeader title="Order" backTo="/menu" />
-			
+			<PageHeader title="Order" backTo="/menu" onReload={onReload} />
 			<div className="container">
-			
 				<TableNumber number={tableNum} orderNumber={order_number}/>
-
-
 				{
 					orderList?.map((item,index) => 
 						<>
@@ -107,22 +75,6 @@ export default function OrderPage(){
 						)
 				}
 
-				{/* <div className=" mb-3 mt-3">
-					<div className="flex-left">
-						<b>Order 1</b>
-					</div>
-				</div>
-				
-				<OrderList item={orderData} />
-				
-				<div className="mb-3 mt-3">
-					<div className="flex-left">
-						<b>Order 2</b>
-					</div>
-				</div>
-				
-				<OrderList item={orderData} />
-				 */}
 				<div className="space-20" />
 				<div className="space-20" />
 				<div className="space-5" />
