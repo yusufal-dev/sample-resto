@@ -18,9 +18,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { rupiah } from '../Helpers';
 import PageBottom from '../components/PageBottom/PageBottom';
+import useCheckOrder from '../hooks/useCheckOrder';
 
 
 export default function OrderPage(){
+
+	useCheckOrder();
 
 	const restaurantInfo = useSelector((state) => state.restaurantInfo)
 	const order_number = restaurantInfo.order.order_id;

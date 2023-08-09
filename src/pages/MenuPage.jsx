@@ -19,12 +19,12 @@ import { PageHeader1 as PageHeader } from '../components/PageHeader/PageHeader1'
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import useWhenReload from '../hooks/useWhenReload';
 import PageBottom from '../components/PageBottom/PageBottom';
+import useCheckOrder from '../hooks/useCheckOrder';
 
 function MenuPage() {
 
-	useWhenReload();
+	useCheckOrder();
 
 	const restaurantInfo = useSelector((state)=>state.restaurantInfo)
 	const menus = useSelector((state) => state.menusList)

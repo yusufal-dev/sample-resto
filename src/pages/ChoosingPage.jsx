@@ -17,11 +17,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment } from '../redux/features/counter/counterSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { addItem } from '../redux/features/cart/cartSlice';
+import useCheckOrder from '../hooks/useCheckOrder';
 
 
 
 
 export default function ChoosingPage(){
+
+    useCheckOrder();
 
     const gSelectedItem = useSelector((state) => state.selectedItem)
     const dispatch = useDispatch()

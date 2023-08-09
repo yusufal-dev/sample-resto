@@ -17,9 +17,12 @@ import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { OrderConfirm } from '../components/Order/OrderConfirm';
+import useCheckOrder from '../hooks/useCheckOrder';
 
 
 export default function CartPage(){
+
+	useCheckOrder();
 
 	const gCart = useSelector((state) => state.cart)
 	const restaurantInfo = useSelector((state) => state.restaurantInfo)

@@ -14,23 +14,26 @@ import {PageHeader2 as PageHeader} from '../components/PageHeader/PageHeader2';
 // import { PaymentMethod } from "../components/Payment/PaymentMethod";
 // import { PaymentChannel, PaymentSelection } from "../components/Payment/PaymentChannel";
 // import { PaymentPayButton } from "../components/Payment/PaymentPayButton";
-
+import { setUserOrder } from '../redux/features/restaurant/restaurantInfo';
 import { PaymentInformation, PaymentMethod, PaymentChannel, PaymentPayButton } from "../components/Payment";
 import TableNumber from "../components/TableNumber";
 import SnapPay from '../components/SnapPay';
 
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useCheckOrder from "../hooks/useCheckOrder";
 
 
 export default function PembayaranPage(){
 
+	useCheckOrder();
+
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const restaurantInfo = useSelector((state) => state.restaurantInfo)
 	const orderNumber = restaurantInfo.order.order_id;
 	const tableNum = restaurantInfo.order.table_num;
 
-	const [order, setOrder] = useState(0);
 	const [snapToken, setSnapToken] = useState();
 	const [isFilling, setIsFilling] = useState(false);
 
@@ -40,9 +43,21 @@ export default function PembayaranPage(){
 		// }).then((response) => {
 		//   setSnapToken(response.data.snap_token)
 		// })
-		// navigate('/paid-order')
-		alert("PAID")
-	
+
+
+		axios.post(process.env.REACT_APP_API_URL+"/payment/complete-order",{
+			'order_number' : orderNumber
+		}).then((response) => {
+			if(response.data.success){
+				dispatch(setUserOrder(response.data.order))
+				navigate('/paid-order')
+
+			}
+			else{
+				alert("PAYMENT FAILED")
+			}
+		})
+
 	}
 
 	function payMidtrans(){

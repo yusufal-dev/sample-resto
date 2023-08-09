@@ -8,7 +8,8 @@ const initialState = {
         subtotal:"",
         cond_amount:"",
         total_discount:"",
-        total:""
+        total:"",
+        updated_at: ""
     },
     restaInfo: {
         name: "",

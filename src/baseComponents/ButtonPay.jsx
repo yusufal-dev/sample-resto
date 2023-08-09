@@ -9,7 +9,7 @@ export default function ButtonConfirm({title, disabled}){
 	const isDisabled = disabled ? ' disabled' : '';
 
 	return(
-		<div className={"button-pay" + isDisabled}>
+		<div className={"button-pay pointer " + isDisabled}>
 			<div className="text-mid mt-1 mb-1"><b>{title}</b></div>
 		
 		</div>

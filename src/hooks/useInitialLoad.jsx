@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setOrderNumber, setUserOrder, setRestaInfo, setTheme } from '../redux/features/restaurant/restaurantInfo';
 
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect} from 'react';
 import axios from 'axios';
 import { setCategories, setMenuForYou, setMenuTodayOffer, setMenus } from '../redux/features/menus/menusSlice';
@@ -9,7 +9,9 @@ import { setCategories, setMenuForYou, setMenuTodayOffer, setMenus } from '../re
 function useInitialLoad(){
     const restaurant = useSelector((state) => state.restaurantInfo)
     const menus = useSelector((state) => state.menusStore)
+    const order = restaurant.order;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     console.log(restaurant)
     console.log(menus)
@@ -32,16 +34,22 @@ function useInitialLoad(){
                 dispatch(setMenuForYou(response.data.menu_for_you))
                 dispatch(setMenuTodayOffer(response.data.menu_today_offer))
 
-                rootStyle.style.setProperty('--color1',response.data.theme.color1 )
-                rootStyle.style.setProperty('--color2',response.data.theme.color2 )
+                rootStyle.style.setProperty('--color1',response.data?.theme?.color1 )
+                rootStyle.style.setProperty('--color2',response.data?.theme?.color2 )
                
-            })
+        })
     }
 
     useEffect(()=>{
         dispatch(setOrderNumber(order_number))
         getOrder();
     }, [order_number])
+
+    useEffect(() => {
+        if(order?.is_paid){
+            navigate("/paid-order");
+        }
+    }, [order])
 
 }
 
