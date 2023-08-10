@@ -7,9 +7,31 @@ import OrderPage from './pages/OrderPage';
 import PembayaranPage from './pages/PembayaranPage';
 import PaidOrder from './pages/PaidOrder';
 import ChoosingPage from './pages/ChoosingPage';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { setMenuList } from './redux/features/menus/menusSlice';
 
 function App() {
+  
+    const dispatch = useDispatch();
+    const restaurant = useSelector((state) => state.restaurantInfo)
+    const orderResta = restaurant?.order;
 
+
+    function getMenuList(){
+      axios.get(process.env.REACT_APP_API_URL + "/orders/get-menu?order_number="+ orderResta.order_id)
+            .then((response) =>{
+              dispatch(setMenuList(response.data.menu_list))
+               
+        })
+    }
+
+    useEffect(()=>{
+      if(orderResta){
+        getMenuList();
+      }
+    }, [orderResta])
   
   return (
     <Router>

@@ -28,14 +28,12 @@ function MenuPage() {
 
 	const restaurantInfo = useSelector((state)=>state.restaurantInfo)
 	const menus = useSelector((state) => state.menusList)
+	console.log(menus.menuList)
 
 	const imgCover = require('../static/header_img.png');
 	const gCart = useSelector((state) => state.cart)
 
-	console.log(menus)
-
-
-
+	
   return (
 	<>
 		<PageHeader0 title={restaurantInfo.restaInfo.name} imgCover={imgCover} />
@@ -74,17 +72,24 @@ function MenuPage() {
 			<div></div>
 			}
 			
+			{
+				menus.menuList?.map(categList =>
+					<>
+						<div key={"title-menu-list"+categList.categ_id}  className='text-black2 text-big2'>
+							<h4><b>{categList.name}</b></h4>
+						</div>
+						<div key={"menu-list"+categList.categ_id} >
+							<MenuList   menuData={categList.items}  />
+						</div>
+					
+					</>
+				)
+			}
 
-			<div  className='text-black2 text-big2'>
-				<h4><b>Special Offers</b></h4>
-			</div>
-			<div>
-				<MenuList />
-			</div>
-			
 
 
 
+			<div className="space-10"></div>
 			<div className="space-10"></div>
 			
 			

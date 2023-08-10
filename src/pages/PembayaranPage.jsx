@@ -34,8 +34,7 @@ export default function PembayaranPage(){
 	const orderNumber = restaurantInfo.order.order_id;
 	const tableNum = restaurantInfo.order.table_num;
 	const orderTotal = restaurantInfo.order.total
-	console.log("sebelum payment")
-	console.log(restaurantInfo)
+
 	const [snapToken, setSnapToken] = useState();
 	const [isFilling, setIsFilling] = useState(false);
 

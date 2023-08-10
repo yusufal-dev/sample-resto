@@ -25,6 +25,7 @@ const initialState = {
         description: "",
         theme_id:""
     },
+    
    
 }
 
@@ -43,7 +44,8 @@ export const restaurantInfoSlice = createSlice({
         },
         setRestaInfo:(state, action) =>{
             state.restaInfo= action.payload
-        }
+        },
+        
     }
 });
 

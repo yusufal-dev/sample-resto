@@ -10,7 +10,6 @@ export function MultipleChoosing({
     const dispatch = useDispatch();
 
     function functAddOpt(item, event){
-        console.log(event.target.checked)
         const isChecked = event.target.checked;
         if(isChecked){
             dispatch(setSelectedItemAddPrice(item.add_price))

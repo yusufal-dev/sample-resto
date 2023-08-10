@@ -13,15 +13,11 @@ function useInitialLoad(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log(restaurant)
-    console.log(menus)
     const url = window.location;
-    console.log("WINDOW")
-    console.log(url)
 
     const [order,setOrder] = useState();
     // const [queryParams, setQueryParams] = useSearchParams();
-    console.log("Order NUMBER "+order)
+  
     const [order_number, setOrderNumber] = useState()
     const rootStyle = document.querySelector(':root')
     
@@ -29,7 +25,7 @@ function useInitialLoad(){
     function getOrder(){
         axios.get(process.env.REACT_APP_API_URL + "/orders/get-order?order_number="+ order_number)
             .then((response) =>{
-                console.log(response.data)
+             
                 dispatch(setUserOrder(response.data.order))
                 dispatch(setRestaInfo(response.data.resta))
                 dispatch(setTheme(response.data.theme))
@@ -48,7 +44,7 @@ function useInitialLoad(){
 
     useEffect(() => {
         if(order){
-            // console.log(queryParams.get("order"))
+    
             setOrderNumber(order)
             localStorage.setItem('qresto-orderNumber', order_number)
         }

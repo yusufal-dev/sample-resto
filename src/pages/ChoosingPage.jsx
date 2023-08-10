@@ -31,8 +31,6 @@ export default function ChoosingPage(){
     const navigate = useNavigate();
 
     const itemOptCat = gSelectedItem.item_opt_cat;
-    console.log("selectedItem")
-    console.log(gSelectedItem)
     const [totalItem, setTotalItem] = useState(1)
     const [selectedOpt, setSelectedOpt] = useState([])
 

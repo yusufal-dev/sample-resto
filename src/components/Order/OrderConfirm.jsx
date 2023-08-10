@@ -37,8 +37,7 @@ export function OrderConfirm({
 
     function onClickConfirm(){
         //CHECK ORDER IN THE BACK END
-        console.log("CART BEFORE SENDING TO BE")
-        console.log(gCart)
+    
         sendOrderToRestaurant()
         dispatch(resetCart())
         onClickButtonConfirm()
@@ -57,7 +56,7 @@ export function OrderConfirm({
             order_items : gCart.items
         })
         .then((response)=>{
-            console.log(response.data)
+          
         })
     }
 

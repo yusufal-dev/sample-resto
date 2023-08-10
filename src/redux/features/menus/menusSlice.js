@@ -16,9 +16,9 @@ const initialState = {
     categories:[{
 
     }],
-    menus:[{
-
-    }]
+    menuList:[],
+    menuTotalPage: 1,
+    menuCurrentPage: 1
 }
 
 export const menuSlice = createSlice({
@@ -34,13 +34,19 @@ export const menuSlice = createSlice({
         setCategories:(state, action) => {
             state.categories = action.payload
         },
-        setMenus: (state, action)=>{
-            state.menus = action.payload            
+        setMenuList: (state, action) => {
+            state.menuList = action.payload
+        },
+        menuTotalPage: (state, action) => {
+            state.menuList = action.payload
+        },
+        menuCurrentPage: (state, action) => {
+            state.menuCurrentPage = action.payload
         }
     }
 });
 
 
-export const {setMenuForYou, setMenuTodayOffer, setCategories, setMenus} = menuSlice.actions
+export const {setMenuForYou, setMenuTodayOffer, setCategories,  setMenuList, menuTotalPage, menuCurrentPage} = menuSlice.actions
 
 export default menuSlice.reducer

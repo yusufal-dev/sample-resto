@@ -6,8 +6,6 @@ import { rupiah } from '../../Helpers';
 import { Link } from 'react-router-dom';
 
 export default function OrderItem({item}){
-	console.log("CHECK ITEM OPTS")
-	console.log(item?.item_opts)
 	
 	return(
 		<div className="card-list pt-3 pb-2">

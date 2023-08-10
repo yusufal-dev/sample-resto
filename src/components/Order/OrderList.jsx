@@ -3,7 +3,7 @@ import OrderItem from './OrderItem';
 
 
 export default function OrderList({item}){
-	console.log(item)
+
 	return(
 		<div>
 		{

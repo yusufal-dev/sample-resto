@@ -13,7 +13,7 @@ function useCheckOrder(){
 
     useEffect(()=>{
         if(orderNumber == ""){
-            console.log(orderNumber)
+          
             navigate("/?order="+ localStorage.getItem('qresto-orderNumber'))
         }
 

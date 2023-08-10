@@ -34,7 +34,7 @@ export default function OrderPage(){
 	const [reload, setReload] = useState(0)
 	const [orderList, setOrderList] = useState();
 	// const [orderTotalPrice, setOrderTotalPrice] = useState(0);
-	console.log(orderList)
+	
 
 	function onReload(){
 		setReload(reload + 1)
@@ -43,7 +43,7 @@ export default function OrderPage(){
 	function get_order_list(){
 		axios.get(process.env.REACT_APP_API_URL + "/order-list?order_number="+order_number)
 			.then((response) =>{
-                console.log(response.data)
+              
 				setOrderList(response.data.order_sequences)
 				dispatch(setUserOrder(response.data.order))
 				
@@ -67,7 +67,7 @@ export default function OrderPage(){
 				{
 					orderList?.map((item,index) => 
 						<>
-							<div className=" mb-3 mt-3">
+							<div key={index} className=" mb-3 mt-3">
 								<div className="flex-left">
 									<b>Order {index+1}</b>
 								</div>

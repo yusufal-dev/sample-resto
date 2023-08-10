@@ -26,7 +26,6 @@ export default function CartPage(){
 
 	const gCart = useSelector((state) => state.cart)
 	const restaurantInfo = useSelector((state) => state.restaurantInfo)
-	console.log(gCart)
 	const orderNumber = restaurantInfo.order.order_id
 	const tableNum = restaurantInfo.order.table_num
 
