@@ -1,7 +1,8 @@
 import '../../styles/all.css';
 import ButtonPay from '../../baseComponents/ButtonPay';
+import { rupiah } from '../../Helpers';
 
-export function PaymentPayButton({isFilling, onClickPay}){
+export function PaymentPayButton({ orderTotal, isFilling, onClickPay}){
 
     
     return(
@@ -10,7 +11,7 @@ export function PaymentPayButton({isFilling, onClickPay}){
                 <small>Total payment</small>
                 <div className="container-between mb-2">
                     <div className="flex-left  w-40">
-                        <p><b>Rp205.618 </b></p>
+                        <p><b>{ rupiah(orderTotal) }</b></p>
                     </div>
                     {
                         isFilling ? 

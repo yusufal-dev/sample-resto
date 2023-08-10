@@ -33,7 +33,9 @@ export default function PembayaranPage(){
 	const restaurantInfo = useSelector((state) => state.restaurantInfo)
 	const orderNumber = restaurantInfo.order.order_id;
 	const tableNum = restaurantInfo.order.table_num;
-
+	const orderTotal = restaurantInfo.order.total
+	console.log("sebelum payment")
+	console.log(restaurantInfo)
 	const [snapToken, setSnapToken] = useState();
 	const [isFilling, setIsFilling] = useState(false);
 
@@ -127,6 +129,7 @@ export default function PembayaranPage(){
 			<div className="card-box mt-1 mb-3 pt-3 pb-3 bg-white">
 				<PaymentInformation
 					onFilling={(x) => setIsFilling(x)}
+					
 				/>
 			</div>
 			{/* <div className="card-box pt-1 pb-1 bg-white">
@@ -138,7 +141,7 @@ export default function PembayaranPage(){
 			<div className="space-5" />
 			<div className="container-float card-t-shadow box-top-radius btm-0 w-100 bg-white">
 
-				<PaymentPayButton isFilling={isFilling} onClickPay={generateSnapToken} />
+				<PaymentPayButton orderTotal={orderTotal} isFilling={isFilling} onClickPay={generateSnapToken} />
 			</div>
 		</div>
 	);

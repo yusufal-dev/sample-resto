@@ -17,7 +17,7 @@ function useCheckOrder(){
             navigate("/?order="+ localStorage.getItem('qresto-orderNumber'))
         }
 
-        if(isPaid){
+        if(parseInt(isPaid) > 0){
             navigate("/paid-order")
         }
     }, [])

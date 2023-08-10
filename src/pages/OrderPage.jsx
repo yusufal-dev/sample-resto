@@ -11,7 +11,7 @@ import ButtonPay from '../baseComponents/ButtonPay';
 import {PageHeader2 as PageHeader} from '../components/PageHeader/PageHeader2';
 import OrderList from '../components/Order/OrderList';
 import TableNumber from '../components/TableNumber';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -19,18 +19,21 @@ import { useEffect, useState } from 'react';
 import { rupiah } from '../Helpers';
 import PageBottom from '../components/PageBottom/PageBottom';
 import useCheckOrder from '../hooks/useCheckOrder';
+import { setUserOrder } from '../redux/features/restaurant/restaurantInfo';
 
 
 export default function OrderPage(){
 
 	useCheckOrder();
 
+	const dispatch = useDispatch();
 	const restaurantInfo = useSelector((state) => state.restaurantInfo)
 	const order_number = restaurantInfo.order.order_id;
 	const tableNum = restaurantInfo.order.table_num
+	const orderTotal = restaurantInfo.order.total
 	const [reload, setReload] = useState(0)
 	const [orderList, setOrderList] = useState();
-	const [orderTotalPrice, setOrderTotalPrice] = useState(0);
+	// const [orderTotalPrice, setOrderTotalPrice] = useState(0);
 	console.log(orderList)
 
 	function onReload(){
@@ -38,14 +41,11 @@ export default function OrderPage(){
 	}
 
 	function get_order_list(){
-		axios.get(process.env.REACT_APP_API_URL + "/order-list", {
-            params: {
-                order_number: order_number
-            }
-        }).then((response) =>{
+		axios.get(process.env.REACT_APP_API_URL + "/order-list?order_number="+order_number)
+			.then((response) =>{
                 console.log(response.data)
 				setOrderList(response.data.order_sequences)
-				setOrderTotalPrice(response.data.order_total_price)
+				dispatch(setUserOrder(response.data.order))
 				
                 
             })
@@ -93,7 +93,7 @@ export default function OrderPage(){
 					<small>Total payment</small>
 					<div className="container-between mb-10">
 						<div className="flex-left  w-40">
-							<p><b>{rupiah(orderTotalPrice)} </b></p>
+							<p><b>{rupiah(orderTotal)} </b></p>
 						</div>
 						<div  className="flex-right w-50">
 							<Link to="/payment">

@@ -13,11 +13,11 @@ import { useSelector } from 'react-redux';
 export default function PaidOrder(){
 
     const restaurantInfo = useSelector((state) => state.restaurantInfo)
-    const order = restaurantInfo.order;
+    const order = restaurantInfo?.order;
 
     return (
 
-        <div >
+        <div className='bg-white vh-100'>
             <div className='space-20'></div>
             
             <div className='center-div'>
@@ -26,10 +26,10 @@ export default function PaidOrder(){
             <div className='text-center'>
                 <h3>Pembayaran Berhasil</h3>
                 <p>
-                    <small className='text-gray'>{new Date(order.updated_at).toLocaleString()}</small><br/>
-                    <small>{order.order_id}</small>
+                    <small className='text-gray'>{new Date(order?.updated_at).toLocaleString()}</small><br/>
+                    <small>{order?.order_id}</small>
                 </p>
-                <h2>{rupiah(parseInt(order.total))}</h2>
+                <h2>{rupiah(parseInt(order?.total))}</h2>
                 <p>
                     <small>via</small><br/>
                     QRIS
