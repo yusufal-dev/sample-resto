@@ -14,7 +14,8 @@ import TodayOffer from '../components/Menu/TodayOffer';
 import ForYou from '../components/Menu/ForYou';
 import CheckoutItem from '../components/CheckoutItem';
 
-import { PageHeader0 } from '../components/PageHeader/PageHeader0';
+//import { PageHeader0 } from '../components/PageHeader/PageHeader0';
+import { PageHeader3 } from '../components/PageHeader/PageHeader3';
 import { PageHeader1 as PageHeader } from '../components/PageHeader/PageHeader1';
 
 import { Link, useNavigate } from 'react-router-dom';
@@ -36,7 +37,8 @@ function MenuPage() {
 	
   return (
 	<>
-		<PageHeader0 title={restaurantInfo.restaInfo.name} imgCover={imgCover} />
+		{/*<PageHeader0 title={restaurantInfo.restaInfo.name} imgCover={imgCover} />*/}
+		<PageHeader3 title="Coffee Supreme - Cempaka Putih" />
 		{/* <PageHeader title="Coffee Supreme - Cempaka Putih" /> */}
 		<div className="container ">
 			{menus?.menuTodayOffer?.items?.length > 0  ? 
