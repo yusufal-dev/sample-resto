@@ -20,13 +20,14 @@ function useInitialLoad(){
   
     const [order_number, setOrderNumber] = useState()
     const rootStyle = document.querySelector(':root')
+    const urlParam = new URLSearchParams(url.search).get('order')
     
 
     function getOrder(){
         axios.get(process.env.REACT_APP_API_URL + "/orders/get-order?order_number="+ order_number)
             .then((response) =>{
-             
-                dispatch(setUserOrder(response.data.order))
+                if(response.data.success){ //NOT FIXED. JIKA INI DIHILANGKAN ADA ERROR DI MS EDGE, CHROME DLL
+                    dispatch(setUserOrder(response.data.order))
                 dispatch(setRestaInfo(response.data.resta))
                 dispatch(setTheme(response.data.theme))
                 dispatch(setMenuForYou(response.data.menu_for_you))
@@ -34,13 +35,17 @@ function useInitialLoad(){
 
                 rootStyle.style.setProperty('--color1',response.data?.theme?.color1 )
                 rootStyle.style.setProperty('--color2',response.data?.theme?.color2 )
+                }
+                
                
         })
     }
 
     useEffect(()=>{
-       setOrder(new URLSearchParams(url.search).get('order'))
-    }, [])
+        if(urlParam != ""){
+            setOrder(urlParam)
+        }
+    }, [urlParam])
 
     useEffect(() => {
         if(order){
