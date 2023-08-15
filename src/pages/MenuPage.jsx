@@ -74,15 +74,23 @@ function MenuPage() {
 			
 			{
 				menus.menuList?.map(categList =>
-					<>
-						<div key={"title-menu-list"+categList.categ_id}  className='text-black2 text-big2'>
-							<h4><b>{categList.name}</b></h4>
-						</div>
-						<div key={"menu-list"+categList.categ_id} >
-							<MenuList   menuData={categList.items}  />
-						</div>
 					
-					</>
+						<>
+						{
+							categList.items?.length > 0 ? 
+							<>
+								<div key={"title-menu-list"+categList.categ_id}  className='text-black2 text-big2'>
+									<h4><b>{categList.name}</b></h4>
+								</div>
+								<div key={"menu-list"+categList.categ_id} >
+									<MenuList   menuData={categList.items}  />
+								</div>
+							
+							</>
+							:
+							<></>
+						}
+						</>
 				)
 			}
 
