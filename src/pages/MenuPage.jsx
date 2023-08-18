@@ -38,7 +38,7 @@ function MenuPage() {
   return (
 	<>
 		{/*<PageHeader0 title={restaurantInfo.restaInfo.name} imgCover={imgCover} />*/}
-		<PageHeader3 title="Coffee Supreme - Cempaka Putih" />
+		<PageHeader3 title="Coffee Supreme - Cempaka Putih"  />
 		{/* <PageHeader title="Coffee Supreme - Cempaka Putih" /> */}
 		<div className="container ">
 			{menus?.menuTodayOffer?.items?.length > 0  ? 

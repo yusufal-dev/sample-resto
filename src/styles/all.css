@@ -75,3 +75,22 @@ a:hover{
     border-width: 1px;
     margin-left: 2vw;
 }
+.search{
+    display: flex;
+    flex-direction: row;
+}
+.search-bar{
+    width: 80vw;
+    height: 31px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #F5F5F5;
+    border:#000000;
+    border-width: 1px;
+    padding-left: 4px;
+}
+.back-button {
+    background: none;
+    border: none;
+    height: 31px;
+}
