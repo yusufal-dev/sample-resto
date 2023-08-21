@@ -17,8 +17,11 @@ const initialState = {
 
     }],
     menuList:[],
+    filteredMenu: [],
+    selectedCategory: 0,
     menuTotalPage: 1,
-    menuCurrentPage: 1
+    menuCurrentPage: 1,
+    searchKeyword: ''
 }
 
 export const menuSlice = createSlice({
@@ -36,17 +39,48 @@ export const menuSlice = createSlice({
         },
         setMenuList: (state, action) => {
             state.menuList = action.payload
+            state.filteredMenu = action.payload
         },
         menuTotalPage: (state, action) => {
             state.menuList = action.payload
         },
         menuCurrentPage: (state, action) => {
             state.menuCurrentPage = action.payload
+        },
+        setFilteredMenu: (state, action) => {
+            if(action.payload.menuList.length>0){
+                for(let i = 0; i < action.payload.menuList.length ; i++){
+                    if(parseInt(state.selectedCategory) === action.payload.menuList[i].categ_id){
+                        state.filteredMenu = [action.payload.menuList[i]];
+                    }
+                }
+            }
+        },
+        setFilter: (state, action) => {
+            state.selectedCategory = action.payload
+            console.log(state.selectedCategory)
+        },
+        setKeyword: (state, action) =>{
+            state.searchKeyword = action.payload
+        },
+        searchMenu: (state, action) =>{
+            state.filteredMenu = []
+            for(let i = 0; i<action.payload.menuList.length; i++){
+                state.filteredMenu.push({
+                    categ_id : action.payload.menuList[i].categ_id,
+                    name :action.payload.menuList[i].name,
+                    description	: action.payload.menuList[i].description,
+                    type: action.payload.menuList[i].type,
+                    items: action.payload.menuList[i].items,
+                })
+                state.filteredMenu[i].items = state.filteredMenu[i].items.filter(x => x?.name?.toLowerCase().includes(state.searchKeyword) || x?.description?.toLowerCase().includes(state.searchKeyword))
+            }
+            console.log(state.filteredMenu)
         }
     }
 });
 
 
-export const {setMenuForYou, setMenuTodayOffer, setCategories,  setMenuList, menuTotalPage, menuCurrentPage} = menuSlice.actions
+export const {setMenuForYou, setMenuTodayOffer, setCategories,  setMenuList, menuTotalPage, menuCurrentPage, setFilteredMenu, setFilter, searchMenu, setKeyword} = menuSlice.actions
 
 export default menuSlice.reducer

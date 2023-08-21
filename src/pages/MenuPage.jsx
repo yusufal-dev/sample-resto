@@ -29,7 +29,6 @@ function MenuPage() {
 
 	const restaurantInfo = useSelector((state)=>state.restaurantInfo)
 	const menus = useSelector((state) => state.menusList)
-	console.log(menus.menuList)
 
 	const imgCover = require('../static/header_img.png');
 	const gCart = useSelector((state) => state.cart)
@@ -40,8 +39,8 @@ function MenuPage() {
 		{/*<PageHeader0 title={restaurantInfo.restaInfo.name} imgCover={imgCover} />*/}
 		<PageHeader3 title="Coffee Supreme - Cempaka Putih"  />
 		{/* <PageHeader title="Coffee Supreme - Cempaka Putih" /> */}
-		<div className="container ">
-			{menus?.menuTodayOffer?.items?.length > 0  ? 
+		<div className="container menu-container">
+			{menus?.menuTodayOffer?.items?.length > 0 && menus.selectedCategory === 0 && menus.searchKeyword === '' ? 
 			<>
 				<div className='container-between mt-1  text-big2 '>
 					<div><h4 className='text-primary mt-0 '><b>Today's Offer</b></h4></div>
@@ -58,7 +57,7 @@ function MenuPage() {
 			<div></div>
 			}
 			
-			{menus?.menuForYou?.items?.length > 0  ? 
+			{menus?.menuForYou?.items?.length > 0 && menus.searchKeyword === '' && menus.selectedCategory === 0  ? 
 			<>
 				<div  className='mt-5 text-black2 text-big2'>
 					<h4 className='mb-1'><b>For You</b></h4>
@@ -75,7 +74,7 @@ function MenuPage() {
 			}
 			
 			{
-				menus.menuList?.map(categList =>
+				menus.filteredMenu?.map(categList =>
 					
 						<>
 						{
