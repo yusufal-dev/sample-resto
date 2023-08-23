@@ -30,6 +30,7 @@ export  function PageHeader3({title}){
             <div className='card-body pl-2 pt-2'>
             <h4 className='mt-0'><b>{title}</b></h4>
             {!isSearch?(<div><select className='filter-dropdown pl-2 mr-1' onChange={e => setCategory(e.target.value)} value={selectedCategory}>
+                <option value="0">All</option>
                 {menus.menuList?.map(
                     category => <>
                         <option value={category.categ_id}>{category.name}</option>

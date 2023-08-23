@@ -48,17 +48,22 @@ export const menuSlice = createSlice({
             state.menuCurrentPage = action.payload
         },
         setFilteredMenu: (state, action) => {
-            if(action.payload.menuList.length>0){
-                for(let i = 0; i < action.payload.menuList.length ; i++){
-                    if(parseInt(state.selectedCategory) === action.payload.menuList[i].categ_id){
-                        state.filteredMenu = [action.payload.menuList[i]];
+            if(parseInt(state.selectedCategory) === 0){
+                state.filteredMenu = action.payload.menuList
+            }
+            else{
+                if(action.payload.menuList.length>0){
+                    for(let i = 0; i < action.payload.menuList.length ; i++){
+                        if(parseInt(state.selectedCategory) === action.payload.menuList[i].categ_id){
+                            state.filteredMenu = [action.payload.menuList[i]];
+                        }
                     }
                 }
             }
+            
         },
         setFilter: (state, action) => {
             state.selectedCategory = action.payload
-            console.log(state.selectedCategory)
         },
         setKeyword: (state, action) =>{
             state.searchKeyword = action.payload
