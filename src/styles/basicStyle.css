@@ -318,3 +318,7 @@
 	padding-bottom: 2vh;
 	border-bottom: 1px solid var(--color-border);
 }
+
+.menu-container{
+	margin-top: 96px;
+}
