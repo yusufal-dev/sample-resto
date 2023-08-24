@@ -20,7 +20,7 @@ function useCheckOrder(){
         if(parseInt(isPaid) > 0){
             navigate("/paid-order")
         }
-    }, [])
+    }, [orderNumber])
 
 }
 
