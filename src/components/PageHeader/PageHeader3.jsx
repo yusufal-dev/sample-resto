@@ -31,9 +31,12 @@ export  function PageHeader3({title}){
             <h4 className='mt-0'><b>{title}</b></h4>
             {!isSearch?(<div><select className='filter-dropdown pl-2 mr-1' onChange={e => setCategory(e.target.value)} value={selectedCategory}>
                 <option value="0">All</option>
+                <option value="-1">Today's Offer</option>
+                <option value="-2">For You</option>
                 {menus.menuList?.map(
                     category => <>
-                        <option value={category.categ_id}>{category.name}</option>
+                        {category.items.length>0?<option value={category.categ_id}>{category.name}</option>:''}
+                        
                     </>
                 )}
             </select>

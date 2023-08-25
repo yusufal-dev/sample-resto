@@ -53,6 +53,7 @@ export const menuSlice = createSlice({
             }
             else{
                 if(action.payload.menuList.length>0){
+                    state.filteredMenu = []
                     for(let i = 0; i < action.payload.menuList.length ; i++){
                         if(parseInt(state.selectedCategory) === action.payload.menuList[i].categ_id){
                             state.filteredMenu = [action.payload.menuList[i]];

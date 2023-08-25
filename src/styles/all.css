@@ -60,13 +60,13 @@ a:hover{
     background: #F3F6FB;
     border:#000000;
     border-width: 1px;
-    width: 228px;
+    width: 60vw;
     height: 31px;
     flex-shrink: 0;
 }
 
 .search-button{
-    width: 104px;
+    width: 27vw;
     height: 31px;
     flex-shrink: 0;
     border-radius: 20px;
@@ -74,6 +74,7 @@ a:hover{
     border:#000000;
     border-width: 1px;
     margin-left: 2vw;
+    cursor: pointer;
 }
 .search{
     display: flex;
@@ -93,4 +94,5 @@ a:hover{
     background: none;
     border: none;
     height: 31px;
+    cursor: pointer;
 }
