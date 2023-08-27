@@ -41,7 +41,7 @@ function MenuPage() {
 		<PageHeader3 title="Coffee Supreme - Cempaka Putih"  />
 		{/* <PageHeader title="Coffee Supreme - Cempaka Putih" /> */}
 		<div className="container menu-container">
-			{menus?.menuTodayOffer?.items?.length > 0 && parseInt(menus.selectedCategory) === 0 && menus.searchKeyword === '' ? 
+			{menus?.menuTodayOffer?.items?.length > 0 && (parseInt(menus.selectedCategory) === 0 || parseInt(menus.selectedCategory) === -1) && menus.searchKeyword === '' ? 
 			<>
 				<div className='container-between mt-1  text-big2 '>
 					<div><h4 className='text-primary mt-0 '><b>Today's Offer</b></h4></div>
@@ -58,7 +58,7 @@ function MenuPage() {
 			<div></div>
 			}
 			
-			{menus?.menuForYou?.items?.length > 0 && menus.searchKeyword === '' && parseInt(menus.selectedCategory) === 0  ? 
+			{menus?.menuForYou?.items?.length > 0 && menus.searchKeyword === '' && (parseInt(menus.selectedCategory) === 0 || parseInt(menus.selectedCategory) === -2)  ? 
 			<>
 				<div  className='mt-5 text-black2 text-big2'>
 					<h4 className='mb-1'><b>For You</b></h4>
