@@ -30,6 +30,7 @@ function MenuPage() {
 	const restaurantInfo = useSelector((state)=>state.restaurantInfo)
 	const menus = useSelector((state) => state.menusList)
 
+
 	const imgCover = require('../static/header_img.png');
 	const gCart = useSelector((state) => state.cart)
 

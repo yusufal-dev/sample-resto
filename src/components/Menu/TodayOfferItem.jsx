@@ -21,7 +21,14 @@ export default function TodayOfferItem({item}){
 	}
 
 
-    const price = item.item_prices ? item.item_prices.amount : 0;
+    const originalPrice = item.item_prices ? item.item_prices.amount : 0;
+	let discount;
+    if(item.discounts){
+        discount = item.discounts?.type == "a" ? item.discounts.amount : parseFloat(item.discounts.percent)/100 * originalPrice;
+    }else{
+        discount = 0;
+    }
+	const actualPrice = parseInt(originalPrice - discount);
     const image = item.image ? process.env.REACT_APP_BE_URL + item.image : NoImage;
 
     return(
@@ -33,19 +40,19 @@ export default function TodayOfferItem({item}){
 					<div className="description-box text-small2">
 						<p className='mt-0 mb-0 text-big2'>{item.name}</p>
 						<p className='text-gray'><small>{item.description}</small></p>
-						<p ><b>{rupiah(price)}</b> </p>
+						{/* <p ><b>{rupiah(price)}</b> </p> */}
 						
-						{/* <p ><b>{rupiah(item.price)}</b> 
+						<p ><b>{rupiah(actualPrice)} </b> 
 						{
-							item.discount && item.discount > 0 ? 
+							item.discounts && discount > 0 ? 
 							<>
-								<small className="text-gray stroke-text">{originalPrice}</small><img className="icon-discount" src={PriceIcon} />
+								<small className="text-gray stroke-text">{rupiah(originalPrice)}</small><img className="icon-discount" src={PriceIcon} />
 							</>
 							
 							:
 							<></>
 						}
-						</p> */}
+						</p>
 							
 
 					</div>

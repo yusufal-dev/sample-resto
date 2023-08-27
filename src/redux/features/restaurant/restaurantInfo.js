@@ -25,6 +25,12 @@ const initialState = {
         description: "",
         theme_id:""
     },
+    condPricing: {
+
+    },
+    condPricingFinal: {
+
+    }
     
    
 }
@@ -45,11 +51,17 @@ export const restaurantInfoSlice = createSlice({
         setRestaInfo:(state, action) =>{
             state.restaInfo= action.payload
         },
+        setCondPricing : (state, action) => {
+            state.condPricing = action.payload
+        },
+        setCondPricingFinal : (state, action) => {
+            state.condPricingFinal = action.payload
+        }
         
     }
 });
 
 
-export const {setOrderNumber, setUserOrder, setTheme, setRestaInfo} = restaurantInfoSlice.actions;
+export const {setOrderNumber, setUserOrder, setTheme, setRestaInfo, setCondPricing, setCondPricingFinal} = restaurantInfoSlice.actions;
 
 export default restaurantInfoSlice.reducer;

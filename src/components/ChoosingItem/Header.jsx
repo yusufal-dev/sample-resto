@@ -11,9 +11,19 @@ export function Header(){
 
     const gSelectedItem = useSelector((state) => state.selectedItem)
     const image = gSelectedItem.image ? process.env.REACT_APP_BE_URL + gSelectedItem.image : NoImage;
-    const price = gSelectedItem.item_prices ? gSelectedItem.item_prices.amount : 0;
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+
+    const originalPrice = gSelectedItem.price ;
+	let discount;
+    if(gSelectedItem.discounts){
+        discount = gSelectedItem.discounts.type == "a" ? gSelectedItem.discounts.amount : parseFloat(gSelectedItem.discounts.percent)/100 * originalPrice;
+    }else{
+        discount = 0;
+    }
+	const actualPrice = parseInt(originalPrice - discount);
 
 
     function onClickClose(){
@@ -35,9 +45,9 @@ export function Header(){
                     <div>
                         <h3 className='mt-0 mb-0 '><b>{gSelectedItem.name}</b></h3>
                         {
-                            gSelectedItem.discount && gSelectedItem.discount > 0 ?
+                            gSelectedItem.discounts && discount > 0 ?
                                 <p className='mt-1 text-small2'>
-                                    <img className="icon-discount " src={PriceIcon}  /> { rupiah(gSelectedItem.discount) } off
+                                    <img className="icon-discount " src={PriceIcon}  /> { rupiah(discount) } off
                                 </p>
                                 :
                                 <></>
@@ -52,11 +62,11 @@ export function Header(){
                         
                     </div>
                     <div className='text-end'>
-                        <b>{rupiah(gSelectedItem.price)}</b><br/>
+                        <b>{rupiah(actualPrice)}</b><br/>
                         {
-                            gSelectedItem.discount ? 
+                            gSelectedItem.discounts ? 
                             <small className='text-gray stroke-text'>
-                            <b>{rupiah(gSelectedItem.price + gSelectedItem.discount)}</b>
+                            <b>{rupiah(originalPrice)}</b>
                         </small>
                             :
                             <></>

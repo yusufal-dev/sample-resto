@@ -5,7 +5,7 @@ const initialState = {
     name: "",
     description: "",
     price: 0,
-    discount: 0,
+    discounts: null,
     image: "",
     item_opt_cat: [{
         item_opts:[]
@@ -24,7 +24,7 @@ export const selectedItemSlice = createSlice({
             state.name = action.payload.name;
             state.description = action.payload.description;
             state.price = action.payload.item_prices ? parseFloat(action.payload.item_prices.amount) : 0;
-            state.discount = action.payload.discount ? action.payload.discount : 0;
+            state.discounts = action.payload.discounts ? action.payload.discounts : null;
             state.image = action.payload.image;
             state.item_opt_cat = action.payload.item_opt_cat;
             state.note = "";

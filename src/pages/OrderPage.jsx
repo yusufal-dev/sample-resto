@@ -31,6 +31,17 @@ export default function OrderPage(){
 	const order_number = restaurantInfo.order.order_id;
 	const tableNum = restaurantInfo.order.table_num
 	const orderTotal = restaurantInfo.order.total
+	const condPricing = restaurantInfo.condPricingFinal;
+    console.log(condPricing)
+
+	const otherFees = condPricing.reduce((prev, item) =>{
+		let amount = item.type == "a" ? item.amount : parseFloat(item.percent)/100 * orderTotal;
+		return parseInt(prev) + parseInt(amount)
+	}, 0) ; 
+
+	const finalTotal = parseInt(orderTotal) + otherFees
+	console.log(otherFees)
+
 	const [reload, setReload] = useState(0)
 	const [orderList, setOrderList] = useState();
 	// const [orderTotalPrice, setOrderTotalPrice] = useState(0);
@@ -91,9 +102,21 @@ export default function OrderPage(){
 				 extraComponent={
 					<>
 					<small>Total payment</small>
+					<div className='pl-1'>
+						{
+							condPricing.length > 0 && condPricing.map(item => 
+								<>
+									<div className="container-between w-45 text-gray text-small3">
+										<div>{item.description}</div>
+										<div>{rupiah(item.type == "a" ? item.amount : parseInt(parseFloat(item.percent)/100 * orderTotal))}</div>
+									</div>
+								</>
+							)
+						}
+					</div>
 					<div className="container-between mb-10">
 						<div className="flex-left  w-40">
-							<p><b>{rupiah(orderTotal)} </b></p>
+							<p><b>{rupiah(finalTotal)} </b></p>
 						</div>
 						<div  className="flex-right w-50">
 							<Link to="/payment">

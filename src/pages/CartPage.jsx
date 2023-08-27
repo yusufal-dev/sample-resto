@@ -29,6 +29,8 @@ export default function CartPage(){
 	const orderNumber = restaurantInfo.order.order_id
 	const tableNum = restaurantInfo.order.table_num
 
+
+
 	const confirmUrl = '/menu'; //link after confirmation
 	const [isConfirm, setIsConfirm] = useState(false);
 	const [modalTitle, setModalTitle] = useState("Confirm Your Order!")

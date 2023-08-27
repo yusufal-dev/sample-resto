@@ -12,8 +12,15 @@ export default function ForYouItem({item}){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const price = item.item_prices ? item.item_prices.amount : 0;
+    
+    const originalPrice = item.item_prices ? item.item_prices.amount : 0;
+    let discount;
+    if(item.discounts){
+        discount = item.discounts?.type == "a" ? item.discounts.amount : parseFloat(item.discounts.percent)/100 * originalPrice;
+    }else{
+        discount = 0;
+    }
+	const actualPrice = parseInt(originalPrice - discount);
     const image = item.image ? process.env.REACT_APP_BE_URL + item.image : NoImage;
     function onClickSelectItem(){
 		
@@ -21,7 +28,7 @@ export default function ForYouItem({item}){
 		navigate('/choosing')
 	}
 
-    var originalPrice = rupiah(parseInt((price + (price*12/100))/100) * 100);
+
     return(
 
         <div className='card-menu w-50'>
@@ -30,10 +37,20 @@ export default function ForYouItem({item}){
                     <img src={image} className="thumbnail " />
                     
                         <p className='mt-1 mb-0'>{item.name}</p>
-                        <p className='mt-1 text-small2'><b>{rupiah(price)}</b></p>
+                        {/* <p className='mt-1 text-small2'><b>{rupiah(price)}</b></p> */}
 
                         {/* FOR DISCOUNT */}
-                        {/* <p className='mt-1 text-small2'><b>{rupiah(price)}</b> <small className="text-gray stroke-text">{originalPrice}</small><img className="icon-discount" src={PriceIcon} /></p> */}
+                        <p className='mt-1 text-small2'><b>{rupiah(actualPrice)} </b> 
+                        {
+							item.discounts && discount > 0 ? 
+							<>
+								<small className="text-gray stroke-text">{rupiah(originalPrice)}</small><img className="icon-discount" src={PriceIcon} />
+							</>
+							
+							:
+							<></>
+						}
+                        </p>
 
 
                 </div>

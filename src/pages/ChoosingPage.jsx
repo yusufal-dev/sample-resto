@@ -30,6 +30,15 @@ export default function ChoosingPage(){
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
+    const originalPrice = gSelectedItem.price ;
+	let discount;
+    if(gSelectedItem.discounts){
+        discount = gSelectedItem.discounts.type == "a" ? gSelectedItem.discounts.amount : parseFloat(gSelectedItem.discounts.percent)/100 * originalPrice;
+    }else{
+        discount = 0;
+    }
+	const actualPrice = parseInt(originalPrice - discount);
+
     const itemOptCat = gSelectedItem.item_opt_cat;
     const [totalItem, setTotalItem] = useState(1)
     const [selectedOpt, setSelectedOpt] = useState([])
@@ -65,9 +74,9 @@ export default function ChoosingPage(){
             name: gSelectedItem.name,
             description: gSelectedItem.description,
             notes: gSelectedItem.note,
-            original_price: gSelectedItem.price,
-            discount: gSelectedItem.discount,
-            total_price: (gSelectedItem.price + gSelectedItem.total_add) * totalItem,
+            original_price: originalPrice,
+            discount: discount,
+            total_price: (actualPrice + gSelectedItem.total_add) * totalItem,
             item_opts: selectedOpt,
             total_add: gSelectedItem.total_add
         }
@@ -76,52 +85,6 @@ export default function ChoosingPage(){
     }
 
 
-    // const topping = [
-    //     {
-    //         key: 1,
-    //         title: "Coffee Size",
-    //         type: "radio",
-    //         sub: [
-    //             {
-    //                 key: 1,
-    //                 name: "Small",
-    //                 price: 0
-    //             },
-    //             {
-    //                 key:2,
-    //                 name: "Medium",
-    //                 price: 5000
-    //             },
-    //             {
-    //                 key:3,
-    //                 name: "Large",
-    //                 price: 10000
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         key:2,
-    //         title:"Milk",
-    //         type:"checklist",
-    //         sub: [
-    //             {
-    //                 key:1,
-    //                 name: "Non-fat Milk",
-    //                 price: 0
-    //             },
-    //             {
-    //                 key:2,
-    //                 name: "Soy Milk",
-    //                 price: 5000
-    //             },
-    //             {
-    //                 key:3,
-    //                 name: "Oat Milk",
-    //                 price: 10000
-    //             }
-    //         ]
-    //     }
-    // ];
 
 
     return(
@@ -204,7 +167,7 @@ export default function ChoosingPage(){
                         </div>
                     </div>
 
-                    <ButtonConfirm  title={"Add Order - " + rupiah((gSelectedItem.price + gSelectedItem.total_add) * totalItem)} onClick={onClickAddCart}  />
+                    <ButtonConfirm  title={"Add Order - " + rupiah((actualPrice + gSelectedItem.total_add) * totalItem)} onClick={onClickAddCart}  />
                 </div>
             </div>
             

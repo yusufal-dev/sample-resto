@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setOrderNumber, setUserOrder, setRestaInfo, setTheme } from '../redux/features/restaurant/restaurantInfo';
+import { setOrderNumber, setUserOrder, setRestaInfo, setTheme, setCondPricing, setCondPricingFinal } from '../redux/features/restaurant/restaurantInfo';
 
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState} from 'react';
@@ -32,6 +32,8 @@ function useInitialLoad(){
                 dispatch(setTheme(response.data.theme))
                 dispatch(setMenuForYou(response.data.menu_for_you))
                 dispatch(setMenuTodayOffer(response.data.menu_today_offer))
+                dispatch(setCondPricing(response.data.cond_pricings))
+                dispatch(setCondPricingFinal(response.data.cond_pricings_final))
 
                 rootStyle.style.setProperty('--color1',response.data?.theme?.color1 )
                 rootStyle.style.setProperty('--color2',response.data?.theme?.color2 )
