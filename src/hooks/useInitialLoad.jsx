@@ -24,23 +24,24 @@ function useInitialLoad(){
     
 
     function getOrder(){
-        axios.get(process.env.REACT_APP_API_URL + "/orders/get-order?order_number="+ order_number)
-            .then((response) =>{
-                if(response.data.success){ //NOT FIXED. JIKA INI DIHILANGKAN ADA ERROR DI MS EDGE, CHROME DLL
-                    dispatch(setUserOrder(response.data.order))
-                dispatch(setRestaInfo(response.data.resta))
-                dispatch(setTheme(response.data.theme))
-                dispatch(setMenuForYou(response.data.menu_for_you))
-                dispatch(setMenuTodayOffer(response.data.menu_today_offer))
-                dispatch(setCondPricing(response.data.cond_pricings))
-                dispatch(setCondPricingFinal(response.data.cond_pricings_final))
 
-                rootStyle.style.setProperty('--color1',response.data?.theme?.color1 )
-                rootStyle.style.setProperty('--color2',response.data?.theme?.color2 )
+            const response = require("../static/sample-data/get-order.json");
+       
+                if(response.success){ //NOT FIXED. JIKA INI DIHILANGKAN ADA ERROR DI MS EDGE, CHROME DLL
+                    dispatch(setUserOrder(response.order))
+                dispatch(setRestaInfo(response.resta))
+                dispatch(setTheme(response.theme))
+                dispatch(setMenuForYou(response.menu_for_you))
+                dispatch(setMenuTodayOffer(response.menu_today_offer))
+                dispatch(setCondPricing(response.cond_pricings))
+                dispatch(setCondPricingFinal(response.cond_pricings_final))
+
+                rootStyle.style.setProperty('--color1',response.theme?.color1 )
+                rootStyle.style.setProperty('--color2',response.theme?.color2 )
                 }
                 
                
-        })
+        
     }
 
     useEffect(()=>{

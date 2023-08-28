@@ -29,7 +29,7 @@ export default function TodayOfferItem({item}){
         discount = 0;
     }
 	const actualPrice = parseInt(originalPrice - discount);
-    const image = item.image ? process.env.REACT_APP_BE_URL + item.image : NoImage;
+    const image = item.image ?  require("../../static"+item.image)  : NoImage;
 
     return(
 

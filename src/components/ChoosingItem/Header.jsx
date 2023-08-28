@@ -10,7 +10,7 @@ import { reset } from '../../redux/features/selectedItem/selectedItem';
 export function Header(){
 
     const gSelectedItem = useSelector((state) => state.selectedItem)
-    const image = gSelectedItem.image ? process.env.REACT_APP_BE_URL + gSelectedItem.image : NoImage;
+    const image = gSelectedItem.image ? require("../../static"+ gSelectedItem.image ) : NoImage;
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

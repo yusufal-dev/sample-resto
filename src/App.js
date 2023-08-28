@@ -20,11 +20,11 @@ function App() {
 
 
     function getMenuList(){
-      axios.get(process.env.REACT_APP_API_URL + "/orders/get-menu?order_number="+ orderResta.order_id)
-            .then((response) =>{
-              dispatch(setMenuList(response.data.menu_list))
+      const response = require("./static/sample-data/get-menu.json");
+      
+      if(response.success) dispatch(setMenuList(response.menu_list))
                
-        })
+      
     }
 
     useEffect(()=>{

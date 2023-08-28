@@ -21,7 +21,7 @@ export default function ForYouItem({item}){
         discount = 0;
     }
 	const actualPrice = parseInt(originalPrice - discount);
-    const image = item.image ? process.env.REACT_APP_BE_URL + item.image : NoImage;
+    const image = item.image ?  require("../../static"+item.image)  : NoImage;
     function onClickSelectItem(){
 		
 		dispatch(setSelectedItem(item))

@@ -38,7 +38,7 @@ export function OrderConfirm({
     function onClickConfirm(){
         //CHECK ORDER IN THE BACK END
     
-        sendOrderToRestaurant()
+        // sendOrderToRestaurant()
         dispatch(resetCart())
         onClickButtonConfirm()
         changeMessage("Success!", "Thank you for ordering!")

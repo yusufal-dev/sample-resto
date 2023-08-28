@@ -63,7 +63,7 @@ export default function OrderPage(){
 	}
 
 	useEffect(()=>{
-		get_order_list()
+		// get_order_list()
 		return function cleanup(){
 			setOrderList(null)
 		}

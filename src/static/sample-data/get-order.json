@@ -1,0 +1,262 @@
+{
+    "success": true,
+    "message": "Notification successfully processed",
+    "order": {
+        "order_id": "E0RBC2023082856086",
+        "table_num": "8",
+        "is_paid": 0,
+        "updated_at": "2023-08-28T05:49:22.000000Z",
+        "subtotal": null,
+        "total_discount": null,
+        "cond_amount": null,
+        "total": null,
+        "midtrans_snap_token": null
+    },
+    "resta": {
+        "name": "Coffee Supreme",
+        "resta_code": "E0rbc",
+        "theme_id": 4,
+        "address": "Cempaka Putih",
+        "logo": ""
+    },
+    "theme": {
+        "theme_id": 4,
+        "description": "My Theme",
+        "color1": "#ff8040",
+        "color2": "#fec0d6",
+        "color3": null,
+        "color4": null
+    },
+    "cond_pricings": [
+        {
+            "id": 1,
+            "description": "Pajak Konsumsi",
+            "is_final": 0,
+            "type": "p",
+            "amount": "0.00",
+            "percent": "10.00"
+        }
+    ],
+    "cond_pricings_final": [
+        {
+            "id": 2,
+            "description": "Pajak Bangunan",
+            "is_final": 1,
+            "type": "a",
+            "amount": "3000.00",
+            "percent": "0.00"
+        },
+        {
+            "id": 4,
+            "description": "Biaya Service",
+            "is_final": 1,
+            "type": "p",
+            "amount": "0.00",
+            "percent": "2.50"
+        }
+    ],
+    "menu_for_you": {
+        "categ_id": 1,
+        "name": "For You",
+        "description": "category for customer.",
+        "type": 1,
+        "items": [
+            {
+                "item_id": 1,
+                "name": "1 Cup of Hot Coffee Latte",
+                "image": "/menu-images/coffee1.jpg",
+                "description": null,
+                "laravel_through_key": 1,
+                "item_prices": {
+                    "amount": "35000.00",
+                    "item_id": 1
+                },
+                "discounts": {
+                    "resta_id": 1,
+                    "disc_id": 2,
+                    "type": "p",
+                    "amount": "0.00",
+                    "percent": "3.00",
+                    "created_at": "2023-08-22T14:23:08.000000Z",
+                    "updated_at": "2023-08-22T14:23:08.000000Z",
+                    "deleted_at": null,
+                    "laravel_through_key": 1
+                },
+                "item_opt_cat": []
+            },
+            {
+                "item_id": 2,
+                "name": "2 Cup of Hot Coffee Latte",
+                "image": "/menu-images/coffee2.jpg",
+                "description": "",
+                "laravel_through_key": 1,
+                "item_prices": {
+                    "amount": "55000.00",
+                    "item_id": 2
+                },
+                "discounts": {
+                    "resta_id": 1,
+                    "disc_id": 2,
+                    "type": "p",
+                    "amount": "0.00",
+                    "percent": "3.00",
+                    "created_at": "2023-08-22T14:23:08.000000Z",
+                    "updated_at": "2023-08-22T14:23:08.000000Z",
+                    "deleted_at": null,
+                    "laravel_through_key": 2
+                },
+                "item_opt_cat": [
+                    {
+                        "id": 1,
+                        "opt_cat_id": "znQVJ",
+                        "description": "tingkat kemanisan",
+                        "item_id": 2,
+                        "item_opts": []
+                    },
+                    {
+                        "id": 3,
+                        "opt_cat_id": "ORB5K",
+                        "description": "topping",
+                        "item_id": 2,
+                        "item_opts": [
+                            {
+                                "id": 1,
+                                "opt_id": "LnoBp",
+                                "opt_cat_id": 3,
+                                "description": "cookies",
+                                "add_price": 5000
+                            },
+                            {
+                                "id": 2,
+                                "opt_id": "k4zxJ",
+                                "opt_cat_id": 3,
+                                "description": "ice cream",
+                                "add_price": 5000
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "item_id": 3,
+                "name": "Paket Murah A",
+                "image": "/menu-images/coffee3.jpg",
+                "description": "1 Block Coffee + 2 Plain Crossant",
+                "laravel_through_key": 1,
+                "item_prices": {
+                    "amount": "63000.00",
+                    "item_id": 3
+                },
+                "discounts": {
+                    "resta_id": 1,
+                    "disc_id": 1,
+                    "type": "a",
+                    "amount": "1000.00",
+                    "percent": "0.00",
+                    "created_at": "2023-08-22T14:21:27.000000Z",
+                    "updated_at": "2023-08-22T14:21:27.000000Z",
+                    "deleted_at": null,
+                    "laravel_through_key": 3
+                },
+                "item_opt_cat": []
+            },
+            {
+                "item_id": 4,
+                "name": "1 White Coffee Latte and 1 Dark Coffee Latte",
+                "image": "/menu-images/coffee4.jpg",
+                "description": "1 White Coffee Latte + 1 Dark Coffee Latte specialty hot brew",
+                "laravel_through_key": 1,
+                "item_prices": {
+                    "amount": "55000.00",
+                    "item_id": 4
+                },
+                "discounts": {
+                    "resta_id": 1,
+                    "disc_id": 2,
+                    "type": "p",
+                    "amount": "0.00",
+                    "percent": "3.00",
+                    "created_at": "2023-08-22T14:23:08.000000Z",
+                    "updated_at": "2023-08-22T14:23:08.000000Z",
+                    "deleted_at": null,
+                    "laravel_through_key": 4
+                },
+                "item_opt_cat": []
+            }
+        ]
+    },
+    "menu_today_offer": {
+        "categ_id": 2,
+        "name": "Today's Offer",
+        "description": "what is special for today ?",
+        "type": 2,
+        "items": [
+            {
+                "item_id": 4,
+                "name": "1 White Coffee Latte and 1 Dark Coffee Latte",
+                "image": "/menu-images/coffee2.jpg",
+                "description": "1 White Coffee Latte + 1 Dark Coffee Latte specialty hot brew",
+                "laravel_through_key": 2,
+                "item_prices": {
+                    "amount": "55000.00",
+                    "item_id": 4
+                },
+                "discounts": {
+                    "resta_id": 1,
+                    "disc_id": 2,
+                    "type": "p",
+                    "amount": "0.00",
+                    "percent": "3.00",
+                    "created_at": "2023-08-22T14:23:08.000000Z",
+                    "updated_at": "2023-08-22T14:23:08.000000Z",
+                    "deleted_at": null,
+                    "laravel_through_key": 4
+                },
+                "item_opt_cat": []
+            },
+            {
+                "item_id": 7,
+                "name": "Coklat Panas Matcha Apel",
+                "image": "/menu-images/coffee3.jpg",
+                "description": "coklat panas + matcha + apple",
+                "laravel_through_key": 2,
+                "item_prices": null,
+                "discounts": {
+                    "resta_id": 1,
+                    "disc_id": 2,
+                    "type": "p",
+                    "amount": "0.00",
+                    "percent": "3.00",
+                    "created_at": "2023-08-22T14:23:08.000000Z",
+                    "updated_at": "2023-08-22T14:23:08.000000Z",
+                    "deleted_at": null,
+                    "laravel_through_key": 7
+                },
+                "item_opt_cat": []
+            },
+            {
+                "item_id": 12,
+                "name": "pudding dingin",
+                "image": "/menu-images/coffee5.jpg",
+                "description": "rasa coklat",
+                "laravel_through_key": 2,
+                "item_prices": {
+                    "amount": "200000.00",
+                    "item_id": 12
+                },
+                "discounts": {
+                    "resta_id": 1,
+                    "disc_id": 1,
+                    "type": "a",
+                    "amount": "1000.00",
+                    "percent": "0.00",
+                    "created_at": "2023-08-22T14:21:27.000000Z",
+                    "updated_at": "2023-08-22T14:21:27.000000Z",
+                    "deleted_at": null,
+                    "laravel_through_key": 12
+                },
+                "item_opt_cat": []
+            }
+        ]
+    }
+}
